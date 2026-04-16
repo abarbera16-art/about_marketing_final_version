@@ -66,22 +66,5 @@
       "linkedin": "12314512",
       "instagram": "1341512"
     }
-  },
-  {
-    "id": 10,
-    "nombre": "alvaro",
-    "rol": "mafiaboss",
-    "fecha": "1616-12-16",
-    "hora": "15:16",
-    "imagenFondo": "Imagenes/ponente-1776338487006-imagen-coche.jpg",
-    "video": "../Recursos/video.mp4",
-    "etiquetas": [
-      "qwe"
-    ],
-    "bio": "qweqeqwr",
-    "redes": {
-      "linkedin": "qweqwe",
-      "instagram": "123"
-    }
   }
 ]
