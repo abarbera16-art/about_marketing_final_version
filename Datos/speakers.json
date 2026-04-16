@@ -34,23 +34,6 @@
     }
   },
   {
-    "id": 8,
-    "nombre": "imna ",
-    "rol": "desta funiona",
-    "fecha": "0123-03-12",
-    "hora": "12:03",
-    "imagenFondo": "C:\\fakepath\\inma.png",
-    "video": "../Recursos/video.mp4",
-    "etiquetas": [
-      "1234"
-    ],
-    "bio": "1512315t124124125123",
-    "redes": {
-      "linkedin": "12315123",
-      "instagram": "123"
-    }
-  },
-  {
     "id": 9,
     "nombre": "alvaro",
     "rol": "adasd",
