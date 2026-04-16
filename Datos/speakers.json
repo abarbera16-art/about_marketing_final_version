@@ -5,7 +5,11 @@
     "rol": "Profesor y consultor de Marketing",
     "imagenFondo": "Imagenes/montalvo-mason.png",
     "video": "Recursos/Equipo Audiovisual/Tik Tok3 LuisMontalvo.mp4.mp4",
-    "etiquetas": ["Live Shopping", "E-Commerce", "Eventos Híbridos"],
+    "etiquetas": [
+      "Live Shopping",
+      "E-Commerce",
+      "Eventos Híbridos"
+    ],
     "bio": "Especialista en la creación y escalado de negocios digitales. Compartirá las claves del comercio electrónico actual.",
     "redes": {
       "linkedin": "#",
@@ -18,11 +22,30 @@
     "rol": "Marketing Manager @youaretheprincess",
     "imagenFondo": "Imagenes/raquel.lol.png",
     "video": "Recursos/Equipo Audiovisual/Tik Tok2 Urprincess .mp4.mp4",
-    "etiquetas": ["Retail", "Branding", "Comunidad"],
+    "etiquetas": [
+      "Retail",
+      "Branding",
+      "Comunidad"
+    ],
     "bio": "Líder de estrategias en una de las marcas más virales. Analizará cómo construir una comunidad sólida y el poder del branding en redes.",
     "redes": {
       "linkedin": "#",
       "instagram": "#"
+    }
+  },
+  {
+    "id": 3,
+    "nombre": "alvaro",
+    "rol": "mafiaboss",
+    "imagenFondo": "../Imagenes/IMAGEN DEFINITIVA.jpeg",
+    "video": "../Recursos/video.mp4",
+    "etiquetas": [
+      "aaaa"
+    ],
+    "bio": "dasgasdaga",
+    "redes": {
+      "linkedin": "ada",
+      "instagram": "adaga"
     }
   }
 ]
