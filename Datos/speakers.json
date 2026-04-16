@@ -32,22 +32,5 @@
       "linkedin": "https://www.linkedin.com/in/raquel-linde/",
       "instagram": "https://www.instagram.com/youaretheprincess/?hl=es"
     }
-  },
-  {
-    "id": 3,
-    "nombre": "Diego",
-    "rol": "Masón",
-    "fecha": "2026-05-01",
-    "hora": "16:47",
-    "imagenFondo": "Imagenes/ponente-1776343577801-fondo-grok.jpg",
-    "video": "../Recursos/video.mp4",
-    "etiquetas": [
-      "Si"
-    ],
-    "bio": "hola",
-    "redes": {
-      "linkedin": "",
-      "instagram": ""
-    }
   }
 ]
