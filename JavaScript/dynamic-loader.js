@@ -27,11 +27,23 @@ async function initApp() {
 
     // 2. Construimos el HTML con la estructura EXACTA del CSS antiguo
 function createSpeakerCard(p) {
-    // 1. Preparamos las redes sociales para que no den error si están vacías
     const linkIn = p.redes?.linkedin || "#";
     const linkIg = p.redes?.instagram || "#";
 
-    // 2. Estructura exacta que pide tu style_antiguo.css
+    // 1. Gestionar la HORA dinámica
+    const horaVisual = p.hora || '18:45'; 
+
+    // 2. Gestionar la FECHA dinámica
+    let diaVisual = "26";
+    let mesVisual = ".03";
+
+    if (p.fecha) {
+        // p.fecha viene como "2026-03-28" -> lo dividimos
+        const partes = p.fecha.split('-'); 
+        diaVisual = partes[2];      // "28"
+        mesVisual = "." + partes[1]; // ".03"
+    }
+
     return `
         <article class="expert-row">
             <div class="expert-info">
@@ -46,11 +58,11 @@ function createSpeakerCard(p) {
             
             <div class="expert-visual">
                 <div class="date-side">
-                    <span class="date-time">18:45</span>
-                    <span class="date-day">26</span>
-                    <span class="date-month">.03</span>
+                    <span class="date-time">${horaVisual}</span>
+                    <span class="date-day">${diaVisual}</span>
+                    <span class="date-month">${mesVisual}</span>
                 </div>
-                <img src="${p.imagenFondo}" alt="${p.nombre}" class="expert-poster" onerror="this.src='https://via.placeholder.com/400x600?text=Imagen+No+Encontrada'">
+                <img src="${p.imagenFondo}" alt="${p.nombre}" class="expert-poster">
             </div>
         </article>
     `;
