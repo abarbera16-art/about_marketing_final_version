@@ -47,5 +47,22 @@
       "linkedin": "ada",
       "instagram": "adaga"
     }
+  },
+  {
+    "id": 4,
+    "nombre": "prueba fecha",
+    "rol": "mafiaboss",
+    "fecha": "0204-11-16",
+    "hora": "15:16",
+    "imagenFondo": "../Imagenes/IMAGEN DEFINITIVA.jpeg",
+    "video": "../Recursos/video.mp4",
+    "etiquetas": [
+      "ceo del sexo"
+    ],
+    "bio": "dasfasdasgasd",
+    "redes": {
+      "linkedin": "https://www.linkedin.com/in/sararodr%C3%ADgueztoledo/",
+      "instagram": "asdafa"
+    }
   }
 ]
