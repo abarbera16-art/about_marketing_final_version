@@ -264,3 +264,4 @@ window.eliminarPonente = async function(id) {
         alert("Fallo crítico: " + e.message);
     }
 };
+
