@@ -107,13 +107,51 @@ async function cargarLista() {
 // ==========================================
 // 3. ANADIR PONENTE
 // ==========================================
+// ==========================================
+// 3. AÑADIR PONENTE (CON SUBIDA DE IMAGEN)
+// ==========================================
 document.getElementById('add-speaker-form').addEventListener('submit', async function(e) {
     e.preventDefault();
     const btn = e.target.querySelector('button');
-    btn.innerText = "Subiendo...";
+    btn.innerText = "Subiendo imagen y datos...";
     btn.disabled = true;
 
     try {
+        // --- PARTE 1: SUBIR LA IMAGEN A GITHUB ---
+        const fileInput = document.getElementById('imagenFondo');
+        const file = fileInput.files[0];
+        let rutaImagenFinal = "";
+
+        if (file) {
+            // 1.1 Convertir la imagen a Base64 (El idioma que entiende la API de GitHub)
+            const base64 = await new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result.split(',')[1]); 
+                reader.readAsDataURL(file);
+            });
+
+            // 1.2 Limpiar el nombre (quita espacios y añade fecha para que no se repitan)
+            const nombreSeguro = file.name.replace(/\s+/g, '-').toLowerCase();
+            const fileName = `ponente-${Date.now()}-${nombreSeguro}`;
+            const imageApiUrl = `https://api.github.com/repos/${REPO_OWNER_AND_NAME}/contents/Imagenes/${fileName}`;
+
+            // 1.3 Enviar la imagen a la carpeta Imagenes/
+            const imgRes = await fetch(imageApiUrl, {
+                method: "PUT",
+                headers: { "Authorization": "token " + GITHUB_TOKEN, "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    message: `Subida automática de foto: ${fileName}`,
+                    content: base64
+                })
+            });
+
+            if (!imgRes.ok) throw new Error("Fallo al subir la imagen a GitHub.");
+            
+            // 1.4 Si la imagen se sube bien, guardamos la ruta perfecta para el JSON
+            rutaImagenFinal = `Imagenes/${fileName}`;
+        }
+
+        // --- PARTE 2: ACTUALIZAR EL JSON CON LOS DATOS ---
         const apiUrl = "https://api.github.com/repos/" + REPO_OWNER_AND_NAME + "/contents/" + FILE_PATH;
         const getRes = await fetch(apiUrl, { headers: { "Authorization": "token " + GITHUB_TOKEN } });
         const fileData = await getRes.json();
@@ -125,9 +163,9 @@ document.getElementById('add-speaker-form').addEventListener('submit', async fun
             id: nuevoId,
             nombre: document.getElementById('nombre').value,
             rol: document.getElementById('rol').value,
-            fecha: document.getElementById('fecha').value, // 👈 Captura la fecha (YYYY-MM-DD)
+            fecha: document.getElementById('fecha').value,
             hora: document.getElementById('hora').value,
-            imagenFondo: document.getElementById('imagenFondo').value,
+            imagenFondo: rutaImagenFinal, // <-- AQUÍ PONEMOS LA RUTA AUTOMÁTICA
             video: document.getElementById('video').value,
             etiquetas: document.getElementById('etiquetas').value.split(',').map(t => t.trim()),
             bio: document.getElementById('bio').value,
@@ -144,19 +182,18 @@ document.getElementById('add-speaker-form').addEventListener('submit', async fun
             method: "PUT",
             headers: { "Authorization": "token " + GITHUB_TOKEN, "Content-Type": "application/json" },
             body: JSON.stringify({
-                message: "Anadido ponente: " + nuevoPonente.nombre,
+                message: "Añadido ponente: " + nuevoPonente.nombre,
                 content: nuevoContenidoBase64,
                 sha: fileData.sha
             })
         });
 
         if (putRes.ok) {
-            alert("Exito! Ponente anadido a GitHub.");
+            alert("¡Éxito! Ponente e Imagen añadidos correctamente.");
             this.reset();
             cargarLista(); 
         } else {
-            const err = await putRes.json();
-            alert("Error de GitHub al guardar: " + err.message);
+            throw new Error("Error al guardar en el JSON.");
         }
     } catch (error) {
         alert("Error de red: " + error.message);
@@ -165,40 +202,3 @@ document.getElementById('add-speaker-form').addEventListener('submit', async fun
         btn.disabled = false;
     }
 });
-
-// ==========================================
-// 4. ELIMINAR PONENTE
-// ==========================================
-window.eliminarPonente = async function(id) {
-    if (!confirm("Seguro que quieres eliminar este ponente?")) return;
-
-    try {
-        const apiUrl = "https://api.github.com/repos/" + REPO_OWNER_AND_NAME + "/contents/" + FILE_PATH;
-        const getRes = await fetch(apiUrl, { headers: { "Authorization": "token " + GITHUB_TOKEN } });
-        const fileData = await getRes.json();
-        let ponentes = JSON.parse(decodeURIComponent(escape(atob(fileData.content))));
-
-        const nuevosPonentes = ponentes.filter(p => p.id !== id);
-        const nuevoContenidoBase64 = btoa(unescape(encodeURIComponent(JSON.stringify(nuevosPonentes, null, 2))));
-
-        const putRes = await fetch(apiUrl, {
-            method: "PUT",
-            headers: { "Authorization": "token " + GITHUB_TOKEN, "Content-Type": "application/json" },
-            body: JSON.stringify({
-                message: "Eliminado ID: " + id,
-                content: nuevoContenidoBase64,
-                sha: fileData.sha
-            })
-        });
-
-        if (putRes.ok) {
-            alert("Ponente eliminado.");
-            cargarLista();
-        } else {
-            const err = await putRes.json();
-            alert("No se pudo eliminar: " + err.message);
-        }
-    } catch (e) {
-        alert("Error de red al eliminar.");
-    }
-};
