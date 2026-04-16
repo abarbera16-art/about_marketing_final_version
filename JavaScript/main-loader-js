@@ -1,0 +1,27 @@
+document.addEventListener('DOMContentLoaded', () => {
+    cargarPonentesInicio();
+});
+
+async function cargarPonentesInicio() {
+    try {
+        const respuesta = await fetch('../Datos/speakers.json');
+        const datos = await respuesta.json();
+        const grid = document.getElementById('speakers-grid');
+
+        if (grid) {
+            datos.forEach(ponente => {
+                const card = document.createElement('div');
+                card.className = 'speaker-card';
+                card.innerHTML = `
+                    <img src="../Imagenes/${ponente.imagen}" alt="${ponente.nombre}">
+                    <h3>${ponente.nombre}</h3>
+                    <p>${ponente.rol}</p>
+                    <a href="ponentes.html?id=${ponente.id}" class="btn-link">Ver perfil</a>
+                `;
+                grid.appendChild(card);
+            });
+        }
+    } catch (error) {
+        console.error("Error al cargar ponentes:", error);
+    }
+}

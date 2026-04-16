@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Privado - About Marketing</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .admin-container { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 90%; max-width: 900px; margin: 20px; }
+        .admin-form input, .admin-form textarea { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        .admin-btn { background: #e63946; color: white; padding: 12px; border: none; width: 100%; font-weight: bold; cursor: pointer; border-radius: 5px; font-size: 16px; }
+        .admin-btn:hover { background: #d62828; }
+        label { font-weight: bold; font-size: 14px; margin-bottom: 5px; display: block;}
+        h3 { border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        
+    </style>
+    <link rel="stylesheet" href="../CSS/style_admin.css">
+</head>
+<body>
+    <div class="admin-logo-header">
+        <img src="../Imagenes/favi.png">
+    </div>
+
+
+    <div id="login-container" class="admin-container" style="max-width: 400px;">
+        <h2 style="text-align: center;">Panel de Control</h2>
+        <div class="admin-form">
+            <input type="password" id="password-input" placeholder="Contraseña secreta...">
+            <button id="login-btn" class="admin-btn">Entrar</button>
+            <p id="error-msg" style="color: red; text-align: center; display: none; margin-top: 15px;">❌ Contraseña incorrecta.</p>
+        </div>
+    </div>
+
+    <div id="panel-container" class="admin-container" style="display: none;">
+        <h2 style="text-align: center;">Panel de Administración de Ponentes</h2>
+        <div style="display: flex; gap: 40px; flex-wrap: wrap;">
+            
+            <div style="flex: 1; min-width: 300px;">
+                <h3>➕ Añadir Nuevo</h3>
+                <form id="add-speaker-form" class="admin-form">
+                    <label>Nombre:</label>
+                    <input type="text" id="nombre" required>
+                    
+                    <label>Rol:</label>
+                    <input type="text" id="rol" required>
+                    
+                    <label>Imagen:</label>
+                    <input type="text" id="imagenFondo" value="../Imagenes/IMAGEN DEFINITIVA.jpeg">
+                    
+                    <label>Vídeo:</label>
+                    <input type="text" id="video" value="../Recursos/video.mp4">
+                    
+                    <label>Etiquetas:</label>
+                    <input type="text" id="etiquetas" placeholder="SEO, IA...">
+                
+                    <label>LinkedIn (URL):</label>
+                    <input type="text" id="linkedin" placeholder="https://linkedin.com/in/...">
+                
+                    <label>Instagram (URL):</label>
+                    <input type="text" id="instagram" placeholder="https://instagram.com/...">
+                    <label>Bio:</label>
+                    <textarea id="bio" rows="3" required></textarea>
+                    <button type="submit" class="admin-btn">Subir a GitHub</button>
+                </form>
+            </div>
+
+            <div style="flex: 1; min-width: 300px;">
+                <h3>🗑️ Gestionar Existentes</h3>
+                <div id="speakers-list" style="max-height: 500px; overflow-y: auto;">
+                    <p>Cargando ponentes...</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="admin.js?v=redes"></script>
+</body>
+</html>

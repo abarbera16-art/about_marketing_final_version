@@ -1,0 +1,35 @@
+[
+  {
+    "id": 11,
+    "nombre": "alvaro",
+    "rol": "131412",
+    "imagenFondo": "../Imagenes/IMAGEN DEFINITIVA.jpeg",
+    "video": "../Recursos/video.mp4",
+    "etiquetas": [
+      "123123"
+    ],
+    "bio": "asdasdasdasdasdadadadaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  {
+    "id": 12,
+    "nombre": "prueba link",
+    "rol": "link",
+    "imagenFondo": "../Imagenes/IMAGEN DEFINITIVA.jpeg",
+    "video": "../Recursos/video.mp4",
+    "etiquetas": [
+      "link linkedin"
+    ],
+    "bio": "biografia tontorrona"
+  },
+  {
+    "id": 13,
+    "nombre": "link 2",
+    "rol": "rol link",
+    "imagenFondo": "../Imagenes/IMAGEN DEFINITIVA.jpeg",
+    "video": "../Recursos/video.mp4",
+    "etiquetas": [
+      "link link"
+    ],
+    "bio": "link bio"
+  }
+]

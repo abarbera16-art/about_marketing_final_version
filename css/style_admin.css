@@ -1,0 +1,192 @@
+/* ==========================================
+   1. AJUSTES DEL BODY Y FONDO
+   ========================================== */
+body {
+    font-family: 'Inter', sans-serif;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2)), url(../Imagenes/fondo-grok.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+}
+
+/* LOGO SIEMPRE ARRIBA */
+.admin-logo-header {
+    margin-bottom: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.admin-logo-header img {
+    width: 150px !important;
+}
+
+/* ==========================================
+   2. CONTENEDOR LOGIN
+   ========================================== */
+#login-container {
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    width: 90%;
+    max-width: 450px;
+    backdrop-filter: blur(10px);
+    background: rgba(15, 20, 30, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+/* ==========================================
+   3. EL PANEL PRINCIPAL (AJUSTADO AL CENTRO)
+   ========================================== */
+#panel-container {
+    display: none; /* Se activa con JS como 'flex' */
+    flex-direction: row; 
+    flex-wrap: wrap; 
+    /* CAMBIO: De space-between a center para juntar las columnas */
+    justify-content: center; 
+    align-items: flex-start;
+    /* Un gap de 50px para que respiren pero no se separen demasiado */
+    gap: 50px; 
+    width: 95%;
+    max-width: 1250px; 
+    padding: 40px;
+    background: rgba(15, 20, 30, 0.9);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+/* Título de Administración (Ocupa el 100% arriba) */
+#panel-container h2:first-child {
+    flex: 0 0 100%; 
+    text-align: center;
+    margin-top: 0;
+    font-size: 2rem;
+    color: rgb(255, 212, 82);
+    border-bottom: 2px solid rgba(255, 212, 82, 0.3);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+/* Columna Izquierda: Formulario */
+.admin-form {
+    /* Le damos un ancho máximo controlado para que no se estire infinito */
+    flex: 0 1 450px; 
+    min-width: 320px;
+}
+
+/* Columna Derecha: Lista Gestión */
+#speakers-list-container {
+    /* Mismo ancho que el formulario para que sea simétrico */
+    flex: 0 1 450px; 
+    min-width: 320px;
+    max-height: 75vh; 
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* ==========================================
+   4. TÍTULOS DE SECCIÓN, INPUTS Y BOTONES
+   ========================================== */
+h3 {
+    color: rgb(255, 212, 82);
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 212, 82, 0.2);
+    padding-bottom: 8px;
+}
+
+label {
+    color: rgb(255, 212, 82);
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: none;
+    background: rgba(255, 255, 255, 0.95);
+    color: #333;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.admin-btn {
+    background: #e63946;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.2s;
+}
+
+.admin-btn:hover {
+    background: #d62828;
+}
+
+/* ==========================================
+   5. LISTA DE PONENTES (ESTILO BLANCO)
+   ========================================== */
+#speakers-list div {
+    background: white !important;
+    color: #333 !important;
+    padding: 15px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* ==========================================
+   6. MODAL DE SEGURIDAD (TOKEN)
+   ========================================== */
+#token-modal input[type="password"] {
+    background: white;
+    color: black;
+    text-align: center;
+    letter-spacing: 5px;
+    font-size: 20px;
+}
+
+/* ==========================================
+   7. RESPONSIVE Y LIMPIEZA
+   ========================================== */
+@media (max-width: 850px) {
+    #panel-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .admin-form, #speakers-list-container {
+        width: 100%;
+        max-width: 100%;
+        flex: none;
+    }
+}
+
+/* Quitamos efectos lentos para que sea instantáneo */
+.entrada-suave, .mostrar-panel, .ocultar-login {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+}
