@@ -49,5 +49,22 @@
       "linkedin": "https://www.linkedin.com/in/sararodr%C3%ADgueztoledo/",
       "instagram": "asdafa"
     }
+  },
+  {
+    "id": 5,
+    "nombre": "nuria",
+    "rol": "mafiaboss",
+    "fecha": "0012-12-12",
+    "hora": "12:12",
+    "imagenFondo": "../Imagenes/favi",
+    "video": "../Recursos/video.mp4",
+    "etiquetas": [
+      ""
+    ],
+    "bio": "bio",
+    "redes": {
+      "linkedin": "",
+      "instagram": ""
+    }
   }
 ]
