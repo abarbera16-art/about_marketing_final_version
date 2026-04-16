@@ -209,3 +209,58 @@ document.getElementById('add-speaker-form').addEventListener('submit', async fun
         btn.disabled = false;
     }
 });
+
+// ==========================================
+// 4. ELIMINAR PONENTE (CORREGIDO)
+// ==========================================
+window.eliminarPonente = async function(id) {
+    if (!confirm("¿Seguro que quieres eliminar a este ponente de la base de datos?")) return;
+
+    try {
+        // Añadimos cacheBuster para leer la versión más reciente antes de borrar
+        const cacheBuster = "?t=" + new Date().getTime();
+        const apiUrl = "https://api.github.com/repos/" + REPO_OWNER_AND_NAME + "/contents/" + FILE_PATH;
+        
+        // 1. OBTENER DATOS (Usando Bearer)
+        const getRes = await fetch(apiUrl + cacheBuster, { 
+            headers: { "Authorization": "Bearer " + GITHUB_TOKEN } 
+        });
+        
+        if (!getRes.ok) throw new Error("No se pudo leer el archivo de GitHub.");
+        
+        const fileData = await getRes.json();
+        let ponentes = JSON.parse(decodeURIComponent(escape(atob(fileData.content))));
+
+        // 2. FILTRAR (Borrar el ID)
+        const nuevosPonentes = ponentes.filter(p => p.id !== id);
+        
+        // 3. ENCRIPTAR
+        const nuevoContenidoBase64 = btoa(unescape(encodeURIComponent(JSON.stringify(nuevosPonentes, null, 2))));
+
+        // 4. ENVIAR COMMIT (Usando Bearer)
+        const putRes = await fetch(apiUrl, {
+            method: "PUT",
+            headers: { 
+                "Authorization": "Bearer " + GITHUB_TOKEN, // <--- UNIFICADO A BEARER
+                "Content-Type": "application/json" 
+            },
+            body: JSON.stringify({
+                message: `Admin: Eliminado ponente ID ${id}`,
+                content: nuevoContenidoBase64,
+                sha: fileData.sha 
+            })
+        });
+
+        if (putRes.ok) {
+            alert("✅ Ponente eliminado correctamente.");
+            // Esperamos un segundo para que GitHub procese y luego recargamos
+            setTimeout(() => { cargarLista(); }, 1000);
+        } else {
+            const err = await putRes.json();
+            alert("❌ GitHub no permitió el borrado: " + err.message);
+        }
+    } catch (e) {
+        console.error("Error al eliminar:", e);
+        alert("Fallo crítico: " + e.message);
+    }
+};
