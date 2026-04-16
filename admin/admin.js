@@ -117,41 +117,46 @@ document.getElementById('add-speaker-form').addEventListener('submit', async fun
     btn.disabled = true;
 
     try {
-        // --- PARTE 1: SUBIR LA IMAGEN A GITHUB ---
+        // 1. CAPTURAR EL ARCHIVO REAL (NO EL FAKEPATH)
         const fileInput = document.getElementById('imagenFondo');
         const file = fileInput.files[0];
         let rutaImagenFinal = "";
 
-        if (file) {
-            // 1.1 Convertir la imagen a Base64 (El idioma que entiende la API de GitHub)
-            const base64 = await new Promise((resolve) => {
-                const reader = new FileReader();
-                reader.onload = () => resolve(reader.result.split(',')[1]); 
-                reader.readAsDataURL(file);
-            });
-
-            // 1.2 Limpiar el nombre (quita espacios y añade fecha para que no se repitan)
-            const nombreSeguro = file.name.replace(/\s+/g, '-').toLowerCase();
-            const fileName = `ponente-${Date.now()}-${nombreSeguro}`;
-            const imageApiUrl = `https://api.github.com/repos/${REPO_OWNER_AND_NAME}/contents/Imagenes/${fileName}`;
-
-            // 1.3 Enviar la imagen a la carpeta Imagenes/
-            const imgRes = await fetch(imageApiUrl, {
-                method: "PUT",
-                headers: { "Authorization": "token " + GITHUB_TOKEN, "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    message: `Subida automática de foto: ${fileName}`,
-                    content: base64
-                })
-            });
-
-            if (!imgRes.ok) throw new Error("Fallo al subir la imagen a GitHub.");
-            
-            // 1.4 Si la imagen se sube bien, guardamos la ruta perfecta para el JSON
-            rutaImagenFinal = `Imagenes/${fileName}`;
+        if (!file) {
+            alert("Por favor, selecciona una imagen.");
+            btn.innerText = "Subir a GitHub";
+            btn.disabled = false;
+            return;
         }
 
-        // --- PARTE 2: ACTUALIZAR EL JSON CON LOS DATOS ---
+        // 2. CONVERTIR A BASE64 Y SUBIR FOTO A GITHUB
+        const base64 = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result.split(',')[1]); 
+            reader.readAsDataURL(file);
+        });
+
+        // Limpiamos el nombre para evitar fallos (quita espacios)
+        const nombreLimpio = file.name.replace(/\s+/g, '-').toLowerCase();
+        const fileName = `ponente-${Date.now()}-${nombreLimpio}`;
+        const imageApiUrl = `https://api.github.com/repos/${REPO_OWNER_AND_NAME}/contents/Imagenes/${fileName}`;
+
+        // Subimos la imagen física
+        const imgRes = await fetch(imageApiUrl, {
+            method: "PUT",
+            headers: { "Authorization": "token " + GITHUB_TOKEN, "Content-Type": "application/json" },
+            body: JSON.stringify({
+                message: `Sube foto: ${fileName}`,
+                content: base64
+            })
+        });
+
+        if (!imgRes.ok) throw new Error("Fallo al subir la imagen a GitHub.");
+        
+        // ¡LA RUTA CORRECTA QUE IRÁ AL JSON!
+        rutaImagenFinal = `Imagenes/${fileName}`;
+
+        // 3. ACTUALIZAR EL JSON
         const apiUrl = "https://api.github.com/repos/" + REPO_OWNER_AND_NAME + "/contents/" + FILE_PATH;
         const getRes = await fetch(apiUrl, { headers: { "Authorization": "token " + GITHUB_TOKEN } });
         const fileData = await getRes.json();
@@ -165,7 +170,8 @@ document.getElementById('add-speaker-form').addEventListener('submit', async fun
             rol: document.getElementById('rol').value,
             fecha: document.getElementById('fecha').value,
             hora: document.getElementById('hora').value,
-            imagenFondo: rutaImagenFinal, // <-- AQUÍ PONEMOS LA RUTA AUTOMÁTICA
+            // 👇 AQUÍ USAMOS LA RUTA REAL GENERADA, NO EL .VALUE DEL INPUT 👇
+            imagenFondo: rutaImagenFinal, 
             video: document.getElementById('video').value,
             etiquetas: document.getElementById('etiquetas').value.split(',').map(t => t.trim()),
             bio: document.getElementById('bio').value,
@@ -178,6 +184,7 @@ document.getElementById('add-speaker-form').addEventListener('submit', async fun
         ponentes.push(nuevoPonente);
         const nuevoContenidoBase64 = btoa(unescape(encodeURIComponent(JSON.stringify(ponentes, null, 2))));
 
+        // 4. GUARDAR EL JSON EN GITHUB
         const putRes = await fetch(apiUrl, {
             method: "PUT",
             headers: { "Authorization": "token " + GITHUB_TOKEN, "Content-Type": "application/json" },
@@ -189,11 +196,11 @@ document.getElementById('add-speaker-form').addEventListener('submit', async fun
         });
 
         if (putRes.ok) {
-            alert("¡Éxito! Ponente e Imagen añadidos correctamente.");
+            alert("¡Éxito! Ponente y foto guardados en la nube.");
             this.reset();
             cargarLista(); 
         } else {
-            throw new Error("Error al guardar en el JSON.");
+            throw new Error("Error al guardar el JSON.");
         }
     } catch (error) {
         alert("Error de red: " + error.message);
