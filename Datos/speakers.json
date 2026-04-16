@@ -34,23 +34,6 @@
     }
   },
   {
-    "id": 7,
-    "nombre": "inma",
-    "rol": "manager",
-    "fecha": "0123-03-12",
-    "hora": "12:34",
-    "imagenFondo": "../Imagenes/inma-guapa.png",
-    "video": "../Recursos/video.mp4",
-    "etiquetas": [
-      "afasfa"
-    ],
-    "bio": "funciona o lloro",
-    "redes": {
-      "linkedin": "agasdfasf",
-      "instagram": "asdasd"
-    }
-  },
-  {
     "id": 8,
     "nombre": "imna ",
     "rol": "desta funiona",
