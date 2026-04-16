@@ -34,21 +34,6 @@
     }
   },
   {
-    "id": 3,
-    "nombre": "alvaro",
-    "rol": "mafiaboss",
-    "imagenFondo": "../Imagenes/IMAGEN DEFINITIVA.jpeg",
-    "video": "../Recursos/video.mp4",
-    "etiquetas": [
-      "aaaa"
-    ],
-    "bio": "dasgasdaga",
-    "redes": {
-      "linkedin": "ada",
-      "instagram": "adaga"
-    }
-  },
-  {
     "id": 4,
     "nombre": "prueba fecha",
     "rol": "mafiaboss",
