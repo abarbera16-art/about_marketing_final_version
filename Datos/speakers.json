@@ -49,5 +49,22 @@
       "linkedin": "12315123",
       "instagram": "123"
     }
+  },
+  {
+    "id": 9,
+    "nombre": "alvaro",
+    "rol": "adasd",
+    "fecha": "0112-03-12",
+    "hora": "12:41",
+    "imagenFondo": "Imagenes/ponente-1776338002266-favi.png",
+    "video": "../Recursos/video.mp4",
+    "etiquetas": [
+      "123123"
+    ],
+    "bio": "3125 12312412",
+    "redes": {
+      "linkedin": "12314512",
+      "instagram": "1341512"
+    }
   }
 ]
