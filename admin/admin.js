@@ -125,6 +125,8 @@ document.getElementById('add-speaker-form').addEventListener('submit', async fun
             id: nuevoId,
             nombre: document.getElementById('nombre').value,
             rol: document.getElementById('rol').value,
+            fecha: document.getElementById('fecha').value, // 👈 Captura la fecha (YYYY-MM-DD)
+            hora: document.getElementById('hora').value,
             imagenFondo: document.getElementById('imagenFondo').value,
             video: document.getElementById('video').value,
             etiquetas: document.getElementById('etiquetas').value.split(',').map(t => t.trim()),
