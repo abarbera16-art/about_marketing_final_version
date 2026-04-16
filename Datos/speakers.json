@@ -34,23 +34,6 @@
     }
   },
   {
-    "id": 6,
-    "nombre": "inma",
-    "rol": "manager you are the princes",
-    "fecha": "1212-12-12",
-    "hora": "12:12",
-    "imagenFondo": "../Imagenes/inma.png",
-    "video": "../Recursos/video.mp4",
-    "etiquetas": [
-      "ceo del sexo"
-    ],
-    "bio": "asfasd",
-    "redes": {
-      "linkedin": "https://www.linkedin.com/in/sararodr%C3%ADgueztoledo/",
-      "instagram": ""
-    }
-  },
-  {
     "id": 7,
     "nombre": "inma",
     "rol": "manager",
