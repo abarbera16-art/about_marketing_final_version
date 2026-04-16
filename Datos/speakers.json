@@ -32,24 +32,5 @@
       "linkedin": "#",
       "instagram": "#"
     }
-  },
-  {
-    "id": 3,
-    "nombre": "INMA NOVILLO",
-    "rol": "Profesora y consultora de Marketing",
-    "fecha": "2026-03-26",
-    "hora": "19:30",
-    "imagenFondo": "Imagenes/ponente-1776339180782-inma.png",
-    "video": "../Recursos/video.mp4",
-    "etiquetas": [
-      "Estrategia",
-      "Branding",
-      "Marketing Digital"
-    ],
-    "bio": "Experta en consultoría estratégica y docencia de alto impacto. Durante su ponencia, desgranará las tendencias actuales en marketing de contenidos y cómo aplicarlas para potenciar la identidad de marca en entornos digitales competitivos.",
-    "redes": {
-      "linkedin": "https://www.linkedin.com/in/inmanovillo",
-      "instagram": "https://www.instagram.com/inma_mkt"
-    }
   }
 ]
