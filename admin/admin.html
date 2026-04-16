@@ -3,17 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Panel Privado - About Marketing</title>
-    <style>
-        body { font-family: Arial, sans-serif; background-color: #f4f4f4; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
-        .admin-container { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 90%; max-width: 900px; margin: 20px; }
-        .admin-form input, .admin-form textarea { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
-        .admin-btn { background: #e63946; color: white; padding: 12px; border: none; width: 100%; font-weight: bold; cursor: pointer; border-radius: 5px; font-size: 16px; }
-        .admin-btn:hover { background: #d62828; }
-        label { font-weight: bold; font-size: 14px; margin-bottom: 5px; display: block;}
-        h3 { border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        
-    </style>
-    <link rel="stylesheet" href="../CSS/style_admin.css">
+    
+    <link rel="stylesheet" href="../css/style_admin.css">
 </head>
 <body>
     <div class="admin-logo-header">
@@ -72,7 +63,17 @@
 
         </div>
     </div>
+<div id="token-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:9999; justify-content:center; align-items:center; backdrop-filter: blur(5px);">
+        <div style="background: rgba(15, 20, 30, 0.9); padding: 30px; border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1); width: 90%; max-width: 400px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); text-align: center;">
+            <h3 style="color: rgb(255, 212, 82); margin-top: 0;">🔐 Token de Acceso</h3>
+            <p style="color: white; font-size: 14px; margin-bottom: 20px;">Pega tu GitHub Token. Se ocultará automáticamente.</p>
 
+            <input type="password" id="token-input-field" placeholder="ghp_xxxxxxxxxxxx" 
+                   style="width: 100%; padding: 12px; border-radius: 8px; border: none; margin-bottom: 20px; box-sizing: border-box; font-size: 16px;">
+
+            <button id="confirm-token-btn" class="admin-btn">Entrar al Panel</button>
+        </div>
+    </div>
     <script src="admin.js?v=redes"></script>
 </body>
 </html>

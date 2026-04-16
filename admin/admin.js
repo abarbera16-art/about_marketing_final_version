@@ -1,9 +1,14 @@
 // ==========================================
 // 1. CONFIGURACION Y LOGIN
 // ==========================================
+
+let GITHUB_TOKEN = ""; 
 const PASSWORD_SECRETA = "marketing2026"; 
-const GITHUB_TOKEN = prompt("Por seguridad, pega tu GitHub Token:");
-const REPO_OWNER_AND_NAME = "abarbera16-art/About_marketing_prueba";
+
+// ERROR DETECTADO: El nombre del repo debe ser el nuevo
+const REPO_OWNER_AND_NAME = "abarbera16-art/about_marketing_final_version"; 
+
+// Verificad que la carpeta "Datos" empiece por mayúscula como en vuestra captura
 const FILE_PATH = "Datos/speakers.json";
 
 const loginBtn = document.getElementById('login-btn');
@@ -11,19 +16,51 @@ const passwordInput = document.getElementById('password-input');
 const loginContainer = document.getElementById('login-container');
 const panelContainer = document.getElementById('panel-container');
 
-// Evento Login
+// Evento Login modificado para el Modal del Token
 loginBtn.addEventListener('click', () => {
     if (passwordInput.value === PASSWORD_SECRETA) {
-        if (!GITHUB_TOKEN) {
-            alert("No has introducido el Token. Refresca la pagina.");
-            return;
-        }
-        loginContainer.style.display = 'none';
-        panelContainer.style.display = 'block';
-        cargarLista(); 
+        
+        // 1. Mostramos el modal del Token en lugar del prompt
+        const modalToken = document.getElementById('token-modal');
+        const inputToken = document.getElementById('token-input-field');
+        const btnConfirmar = document.getElementById('confirm-token-btn');
+
+        modalToken.style.display = 'flex';
+        inputToken.focus(); 
+
+        // 2. Al hacer clic en confirmar dentro del modal
+        btnConfirmar.onclick = () => {
+            const valorToken = inputToken.value.trim();
+            
+            if (!valorToken) {
+                alert("Por favor, introduce el token para continuar.");
+                return;
+            }
+
+            GITHUB_TOKEN = valorToken; // Guardamos el token privado
+            modalToken.style.display = 'none';
+
+            // 3. Cambio de panel instantáneo
+            loginContainer.style.display = 'none';
+            panelContainer.style.display = 'flex'; // Usamos flex para las dos columnas del panel
+            
+            cargarLista(); 
+        };
+
     } else {
         alert("Contrasena incorrecta");
     }
+});
+
+window.addEventListener('DOMContentLoaded', () => {
+    const logo = document.querySelector('.admin-logo-header');
+    const loginBox = document.getElementById('login-container');
+
+    // Mantenemos tus tiempos de entrada si quieres, pero sin el prompt estorbando
+    setTimeout(() => {
+        if(logo) logo.classList.add('entrada-suave');
+        if(loginBox) loginBox.classList.add('entrada-suave');
+    }, 100);
 });
 
 // ==========================================
@@ -38,7 +75,7 @@ async function cargarLista() {
         const apiUrl = "https://api.github.com/repos/" + REPO_OWNER_AND_NAME + "/contents/" + FILE_PATH + cacheBuster;
         
         const res = await fetch(apiUrl, { 
-            headers: { "Authorization": "token " + GITHUB_TOKEN } 
+            headers: { "Authorization": "Bearer " + GITHUB_TOKEN }
         });
 
         if (!res.ok) throw new Error("Error en la respuesta de GitHub.");
@@ -50,6 +87,7 @@ async function cargarLista() {
 
         content.forEach(p => {
             const item = document.createElement('div');
+            // Mantenemos tu estilo de item
             item.style = "background: #fff; padding: 15px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center; color: black;";
             item.innerHTML = `
                 <div>
@@ -91,7 +129,6 @@ document.getElementById('add-speaker-form').addEventListener('submit', async fun
             video: document.getElementById('video').value,
             etiquetas: document.getElementById('etiquetas').value.split(',').map(t => t.trim()),
             bio: document.getElementById('bio').value,
-            // 👇 AÑADIMOS EL BLOQUE DE REDES AQUÍ 👇
             redes: {
                 linkedin: document.getElementById('linkedin').value.trim(),
                 instagram: document.getElementById('instagram').value.trim()

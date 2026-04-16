@@ -3,7 +3,8 @@
    ========================================== */
 body {
     font-family: 'Inter', sans-serif;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2)), url(../Imagenes/fondo-grok.jpg);
+    /* GRADIENTE CORREGIDO: Oscuro arriba (0.85) a más claro abajo (0.2) */
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 100%), url('../Imagenes/fondo-grok.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -13,11 +14,12 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    justify-content: center; /* ESTO CENTRA EL PANEL VERTICALMENTE */
     align-items: center;
     overflow-y: auto;
 }
 
-/* LOGO SIEMPRE ARRIBA */
+/* LOGO SIEMPRE ARRIBA Y CENTRADO */
 .admin-logo-header {
     margin-bottom: 30px;
     width: 100%;
@@ -27,10 +29,11 @@ body {
 
 .admin-logo-header img {
     width: 150px !important;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
 }
 
 /* ==========================================
-   2. CONTENEDOR LOGIN
+   2. CONTENEDOR LOGIN (RECUPERADO EL TONO ORIGINAL)
    ========================================== */
 #login-container {
     padding: 40px;
@@ -39,26 +42,35 @@ body {
     width: 90%;
     max-width: 450px;
     backdrop-filter: blur(10px);
-    background: rgba(15, 20, 30, 0.8);
+    background: rgba(15, 20, 30, 0.8); /* EL COLOR TRANSLÚCIDO EXACTO ORIGINAL */
     border: 1px solid rgba(255, 255, 255, 0.1);
     text-align: center;
 }
 
+#login-container h2 {
+    font-family: 'Horizon', sans-serif; /* FUENTE AÑADIDA */
+    color: rgb(255, 212, 82);
+    font-weight: normal;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
 /* ==========================================
-   3. EL PANEL PRINCIPAL (AJUSTADO AL CENTRO)
+   3. EL PANEL PRINCIPAL (DOS COLUMNAS RECUPERADAS)
+   ========================================== */
+/* ==========================================
+   3. EL PANEL PRINCIPAL (HECHO MÁS ESTRECHO Y COMPACTO)
    ========================================== */
 #panel-container {
-    display: none; /* Se activa con JS como 'flex' */
+    display: none; /* Se activa con JS */
     flex-direction: row; 
     flex-wrap: wrap; 
-    /* CAMBIO: De space-between a center para juntar las columnas */
     justify-content: center; 
     align-items: flex-start;
-    /* Un gap de 50px para que respiren pero no se separen demasiado */
-    gap: 50px; 
-    width: 95%;
-    max-width: 1250px; 
-    padding: 40px;
+    gap: 30px; /* CAMBIO: Reducido de 50px a 30px para juntar las columnas */
+    width: 90%;
+    max-width: 850px; /* CAMBIO CLAVE: Antes era 1250px. Ahora es mucho más delgado */
+    padding: 35px 40px;
     background: rgba(15, 20, 30, 0.9);
     backdrop-filter: blur(15px);
     border-radius: 20px;
@@ -66,12 +78,13 @@ body {
     box-shadow: 0 20px 50px rgba(0,0,0,0.5);
 }
 
-/* Título de Administración (Ocupa el 100% arriba) */
+/* Título de Administración */
 #panel-container h2:first-child {
+    font-family: 'Horizon', sans-serif; 
     flex: 0 0 100%; 
     text-align: center;
     margin-top: 0;
-    font-size: 2rem;
+    font-size: 1.8rem; /* Un pelín más pequeño para que encaje elegante */
     color: rgb(255, 212, 82);
     border-bottom: 2px solid rgba(255, 212, 82, 0.3);
     padding-bottom: 15px;
@@ -80,23 +93,20 @@ body {
 
 /* Columna Izquierda: Formulario */
 .admin-form {
-    /* Le damos un ancho máximo controlado para que no se estire infinito */
-    flex: 0 1 450px; 
-    min-width: 320px;
+    flex: 1; /* Se reparte el espacio al 50% con la otra columna */
+    min-width: 280px; /* Evita que se rompa en móviles */
 }
 
 /* Columna Derecha: Lista Gestión */
-#speakers-list-container {
-    /* Mismo ancho que el formulario para que sea simétrico */
-    flex: 0 1 450px; 
-    min-width: 320px;
-    max-height: 75vh; 
+#speakers-list-container, #panel-container > div > div:nth-child(2) {
+    flex: 1; /* Se reparte el espacio al 50% con la otra columna */
+    min-width: 280px;
+    max-height: 65vh; /* Ajuste para que la lista no estire el panel infinitamente */
     overflow-y: auto;
     padding-right: 10px;
 }
-
 /* ==========================================
-   4. TÍTULOS DE SECCIÓN, INPUTS Y BOTONES
+   4. TÍTULOS DE SECCIÓN, INPUTS, LABELS Y BOTONES
    ========================================== */
 h3 {
     color: rgb(255, 212, 82);
@@ -105,6 +115,7 @@ h3 {
     padding-bottom: 8px;
 }
 
+/* RECUPERADOS LOS TEXTOS DE LOS CAMPOS */
 label {
     color: rgb(255, 212, 82);
     display: block;
@@ -123,6 +134,7 @@ input, textarea {
     color: #333;
     box-sizing: border-box;
     font-size: 14px;
+    font-family: 'Inter', sans-serif;
 }
 
 .admin-btn {
@@ -135,11 +147,12 @@ input, textarea {
     font-weight: bold;
     cursor: pointer;
     font-size: 16px;
-    transition: background 0.2s;
+    transition: background 0.2s, transform 0.2s;
 }
 
 .admin-btn:hover {
     background: #d62828;
+    transform: scale(1.02);
 }
 
 /* ==========================================
@@ -169,24 +182,16 @@ input, textarea {
 }
 
 /* ==========================================
-   7. RESPONSIVE Y LIMPIEZA
+   7. RESPONSIVE
    ========================================== */
 @media (max-width: 850px) {
     #panel-container {
         flex-direction: column;
         align-items: center;
     }
-    .admin-form, #speakers-list-container {
+    .admin-form, #speakers-list-container, #panel-container > div > div:nth-child(2) {
         width: 100%;
         max-width: 100%;
         flex: none;
     }
-}
-
-/* Quitamos efectos lentos para que sea instantáneo */
-.entrada-suave, .mostrar-panel, .ocultar-login {
-    opacity: 1 !important;
-    transform: none !important;
-    animation: none !important;
-    transition: none !important;
 }

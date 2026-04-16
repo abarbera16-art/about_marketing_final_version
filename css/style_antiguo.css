@@ -253,7 +253,7 @@ body {
     position: relative;
     border-top: 3px solid var(--color-negro);
     border-bottom: 3px solid var(--color-negro);
-    margin-top: -30px; 
+    margin-top: -62px; 
     margin-bottom: 80px;
     z-index: 5;
     display: flex;
@@ -304,7 +304,7 @@ body {
     align-items: center;
     margin-bottom: 120px; 
     gap: 40px; 
-    border-bottom: 1px solid rgba(255,255,255,0.1); 
+    border-bottom: 1px solid var(--color-amarillo); /* CAMBIO: Línea amarilla en ponentes */
     padding-bottom: 80px;
 }
 
@@ -350,7 +350,7 @@ body {
 }
 
 .social-btn:hover { 
-    background: var(--color-rojo); 
+    background: var(--color-rojo); /* CAMBIO: Hover rojo en redes sociales de ponentes */
     border-color: var(--color-rojo);
     color: var(--text-white); 
 }
@@ -366,31 +366,31 @@ body {
 }
 
 .date-side { 
-    text-align: center; 
+    text-align: right; /* En móvil puedes centrarlo si lo prefieres */
     font-family: 'Horizon', sans-serif; 
     color: white; 
+    white-space: nowrap; /* 🚀 ESTO ES CLAVE: Prohíbe terminantemente el salto de línea */
 }
 
 .date-time { 
-    display: block; 
+    display: block; /* Se asegura de que la hora se quede sola en la parte de arriba */
     font-size: 1.1rem; 
     color: var(--color-amarillo); 
     margin-bottom: 5px; 
 }
 
 .date-day { 
-    display: block; 
-    font-size: clamp(4rem, 8vw, 7rem); 
+    display: inline-block; 
+    font-size: clamp(3rem, 6vw, 7rem); /* He suavizado un poco el clamp para asegurar que quepa */
     line-height: 0.8; 
     font-weight: 900; 
 }
 
 .date-month { 
-    display: block; 
-    font-size: clamp(2.5rem, 5vw, 4rem); 
+    display: inline-block; 
+    font-size: clamp(2rem, 4vw, 4rem); 
     font-weight: 900; 
 }
-
 .expert-poster { 
     width: 100%; 
     max-width: 320px; 
@@ -535,12 +535,12 @@ body {
 .carousel-btn.next { right: 10px; }
 
 /* ==========================================
-   FOOTER
+   FOOTER (CAMBIO: REDUCIDO TAMAÑO Y ALINEACIÓN DERECHA EN LEGALES)
 ============================================= */
 .main-footer {
     background-color: rgb(32, 32, 32);
     border-top: 3px solid var(--color-amarillo);
-    padding: 60px 5% 20px;
+    padding: 30px 5% 15px; /* Reducido padding superior e inferior */
     color: rgba(255, 255, 255, 0.8);
     font-family: var(--font-body);
 }
@@ -549,9 +549,9 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    gap: 40px;
+    gap: 20px; /* Reducido gap */
     max-width: 900px;
-    margin: 0 auto 40px;
+    margin: 0 auto 20px; /* Reducido margen inferior */
 }
 
 .footer-logo-info {
@@ -559,28 +559,30 @@ body {
 }
 
 .footer-logo {
-    height: 50px;
-    margin-bottom: 15px;
+    height: 40px; /* Reducida altura logo */
+    margin-bottom: 10px; /* Reducido margen inferior */
 }
 
 .footer-logo-info p {
-    font-size: 0.95rem;
-    line-height: 1.5;
+    font-size: 0.85rem; /* Reducido tamaño fuente */
+    line-height: 1.4;
     color: rgba(255, 255, 255, 0.8);
 }
 
 .footer-links {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px; /* Reducido gap */
     min-width: 200px;
+    align-items: flex-end; /* Alinear a la derecha */
+    text-align: right;     /* Alinear a la derecha */
 }
 
 .footer-links h4 {
     color: var(--color-amarillo);
     font-family: var(--font-title);
-    font-size: 1.2rem;
-    margin-bottom: 10px;
+    font-size: 1.1rem; /* Reducido tamaño fuente */
+    margin-bottom: 5px; /* Reducido margen inferior */
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -588,7 +590,7 @@ body {
 .footer-links a {
     color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
-    font-size: 0.95rem;
+    font-size: 0.85rem; /* Reducido tamaño fuente */
     transition: color 0.3s ease;
     width: fit-content;
 }
@@ -599,9 +601,9 @@ body {
 
 .footer-bottom {
     text-align: center;
-    padding-top: 20px;
+    padding-top: 15px; /* Reducido padding superior */
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: 0.85rem;
+    font-size: 0.75rem; /* Reducido tamaño fuente */
     color: rgba(255, 255, 255, 0.8);
 }
 
@@ -620,7 +622,7 @@ body {
     .section-title { font-size: 2rem; }
     .marquee-container { margin-top: -60px; }
     .footer-content { flex-direction: column; text-align: center; align-items: center; }
-    .footer-links { align-items: center; }
+    .footer-links { align-items: center; text-align: center; } /* Centrado en móvil */
 }
 
 img, video {
@@ -809,4 +811,96 @@ body {
 .day.selected {
     outline: 2px solid var(--color-rojo);
     transform: scale(1.1);
+}
+
+
+/* ==========================================================================
+   ESTILOS DINÁMICOS - SECCIÓN PONENTES (Generado por JS)
+   ========================================================================== */
+
+/* Estructura Grid responsiva sin necesidad de Media Queries */
+.speakers-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    margin-top: 3rem;
+    padding: 1rem;
+}
+
+/* Estilo de las tarjetas generadas por JS */
+.speaker-card {
+    background-color: #0D0D0D; /* Fondo corporativo About Marketing */
+    border: 1px solid #333333;
+    border-radius: 16px;
+    padding: 1.5rem;
+    color: #FFFFFF;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    
+    /* Animación de entrada inicial */
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-out forwards;
+    
+    /* Micro-interacción: transición suave al pasar el ratón */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto Hover (al pasar el ratón por encima) */
+.speaker-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(232, 197, 71, 0.15); /* Reflejo sutil con el color de acento amarillo */
+}
+
+/* Keyframes para que las tarjetas aparezcan desde abajo */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ajuste de las imágenes de fondo de los ponentes */
+.aesthetic-img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    object-fit: cover;
+}
+
+/* Contenedor de las etiquetas (tags) */
+.speaker-tags {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 10px 0 15px 0;
+}
+
+/* Diseño individual de cada etiqueta (ej. "E-Commerce", "Retail") */
+.tag {
+    background-color: #E8C547; /* Color de acento corporativo */
+    color: #0D0D0D;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+/* Estilo para los enlaces de redes sociales dentro de la tarjeta */
+.speaker-socials .social-link {
+    color: #E8C547;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.speaker-socials .social-link:hover {
+    color: #FFFFFF;
 }

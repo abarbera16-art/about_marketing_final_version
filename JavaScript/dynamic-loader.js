@@ -3,7 +3,8 @@ const container = document.getElementById('speakers-container');
 async function initApp() {
     try {
         const cacheBuster = "?t=" + new Date().getTime();
-        const response = await fetch('../Datos/speakers.json' + cacheBuster);
+        // Quitamos el "../" asumiendo que "Datos" está en la raíz junto a index.html
+        const response = await fetch('Datos/speakers.json' + cacheBuster);
         
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -23,46 +24,33 @@ async function initApp() {
     }
 }
 
+
+    // 2. Construimos el HTML con la estructura EXACTA del CSS antiguo
 function createSpeakerCard(p) {
-    const etiquetas = p.etiquetas || [];
-    const tagsHTML = etiquetas.map(t => `<li class="tag">${t}</li>`).join('');
+    // 1. Preparamos las redes sociales para que no den error si están vacías
+    const linkIn = p.redes?.linkedin || "#";
+    const linkIg = p.redes?.instagram || "#";
 
-    // Comprobamos si existen las redes y si no están vacías
-    const linkIn = p.redes?.linkedin;
-    const linkIg = p.redes?.instagram;
-
-    // Si hay enlace, mostramos el botón. Si está vacío o no existe, lo ocultamos ('none')
-    const displayIn = (linkIn && linkIn !== "") ? "inline-block" : "none";
-    const displayIg = (linkIg && linkIg !== "") ? "inline-block" : "none";
-    
-    // Si no tiene ninguna red social en absoluto, ocultamos todo el contenedor
-    const mostrarContenedorRedes = (displayIn === "none" && displayIg === "none") ? "none" : "block";
-
+    // 2. Estructura exacta que pide tu style_antiguo.css
     return `
-        <article class="speaker-card">
-            <div class="speaker-visual">
-                <img src="${p.imagenFondo}" alt="${p.nombre}" class="aesthetic-img" loading="lazy" onerror="this.src='https://via.placeholder.com/300x400?text=Error+de+Imagen'">
-            </div>
-
-            <div class="speaker-video">
-                <div class="phone-mockup-container">
-                    <video autoplay loop muted playsinline controls class="vertical-video mockup-video video-ponente">
-                        <source src="${p.video}" type="video/mp4">
-                    </video>
-                    <img src="../Imagenes/depositphotos_166282680-stock-photo-new-modern-frameless-smartphone-mockup-removebg-preview.png" class="phone-frame" alt="Móvil">
+        <article class="expert-row">
+            <div class="expert-info">
+                <h3 class="expert-name">${p.nombre.replace(' ', '<br> ')}</h3>
+                <p class="expert-subtitle">${p.rol}</p>
+                <p class="expert-desc">${p.bio}</p>
+                <div class="expert-socials">
+                    <a href="${linkIg}" class="social-btn" target="_blank">INSTAGRAM</a>
+                    <a href="${linkIn}" class="social-btn" target="_blank">LINKEDIN</a>
                 </div>
             </div>
-
-            <div class="speaker-info">
-                <h3 class="speaker-name">${p.nombre}</h3>
-                <p class="speaker-role">${p.rol}</p>
-                <ul class="speaker-tags">${tagsHTML}</ul>
-                <p class="speaker-bio">${p.bio}</p>
-                
-                <div class="speaker-socials" style="display: ${mostrarContenedorRedes}; margin-top: 15px;">
-                    <a href="${linkIn}" target="_blank" class="social-link" style="display: ${displayIn}; margin-right: 10px;">LinkedIn</a>
-                    <a href="${linkIg}" target="_blank" class="social-link" style="display: ${displayIg};">Instagram</a>
+            
+            <div class="expert-visual">
+                <div class="date-side">
+                    <span class="date-time">18:45</span>
+                    <span class="date-day">26</span>
+                    <span class="date-month">.03</span>
                 </div>
+                <img src="${p.imagenFondo}" alt="${p.nombre}" class="expert-poster" onerror="this.src='https://via.placeholder.com/400x600?text=Imagen+No+Encontrada'">
             </div>
         </article>
     `;
