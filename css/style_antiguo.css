@@ -904,3 +904,61 @@ body {
 .speaker-socials .social-link:hover {
     color: #FFFFFF;
 }
+
+@media (max-width: 768px) {
+    /* Forzamos Flexbox en el contenedor dinámico y la tarjeta */
+    #speakers-container, .speaker-card {
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    
+    /* 'display: contents' elimina visualmente las columnas para permitir el reorden global */
+    .speaker-info, .speaker-visual, .speaker-video {
+        display: contents !important;
+    }
+    
+    /* 1. Nombre */
+    .speaker-name {
+        order: 1 !important;
+        margin-bottom: 10px !important;
+        text-align: center;
+    }
+    
+    /* 2. Imagen/Cartel */
+    .aesthetic-img, .vertical-video {
+        order: 2 !important;
+        margin-bottom: 20px !important;
+        width: 100% !important;
+        max-width: 320px !important;
+        height: auto !important;
+        align-self: center;
+    }
+    
+    /* 3. Subtítulo/Rol */
+    .speaker-role {
+        order: 3 !important;
+        margin-bottom: 15px !important;
+        text-align: center;
+    }
+    
+    /* 4. Etiquetas */
+    .speaker-tags {
+        order: 4 !important;
+        justify-content: center !important;
+        margin-bottom: 15px !important;
+    }
+    
+    /* 5. Biografía */
+    .speaker-bio {
+        order: 5 !important;
+        margin-bottom: 25px !important;
+        text-align: center;
+    }
+    
+    /* 6. Redes Sociales */
+    .speaker-socials {
+        order: 6 !important;
+        justify-content: center !important;
+        margin-bottom: 10px !important;
+    }
+}
