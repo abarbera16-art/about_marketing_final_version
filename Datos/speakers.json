@@ -32,22 +32,5 @@
       "linkedin": "https://www.linkedin.com/in/raquel-linde/",
       "instagram": "https://www.instagram.com/youaretheprincess/?hl=es"
     }
-  },
-  {
-    "id": 3,
-    "nombre": "prueba mi web",
-    "rol": "mafiaboss",
-    "fecha": "2027-11-16",
-    "hora": "11:11",
-    "imagenFondo": "Imagenes/ponente-1776426314409-favi.png",
-    "video": "../Recursos/video.mp4",
-    "etiquetas": [
-      "ceo del sexo"
-    ],
-    "bio": "ejemplo ejemplez",
-    "redes": {
-      "linkedin": "https://www.linkedin.com/in/sararodr%C3%ADgueztoledo/",
-      "instagram": "https://www.instagram.com/inma_mkt"
-    }
   }
 ]
