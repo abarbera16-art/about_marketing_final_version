@@ -32,23 +32,5 @@
       "linkedin": "https://www.linkedin.com/in/raquel-linde/",
       "instagram": "https://www.instagram.com/youaretheprincess/?hl=es"
     }
-  },
-  {
-    "id": 3,
-    "nombre": "INMA NOVILLO",
-    "rol": "CEO",
-    "fecha": "2026-11-16",
-    "hora": "11:00",
-    "imagenFondo": "Imagenes/ponente-1776365803891-inma.png",
-    "video": "../Recursos/video.mp4",
-    "etiquetas": [
-      "SEO",
-      "MARKETING DIGITAL"
-    ],
-    "bio": "HOLA",
-    "redes": {
-      "linkedin": "https://www.instagram.com",
-      "instagram": ""
-    }
   }
 ]
