@@ -32,5 +32,22 @@
       "linkedin": "https://www.linkedin.com/in/raquel-linde/",
       "instagram": "https://www.instagram.com/youaretheprincess/?hl=es"
     }
+  },
+  {
+    "id": 3,
+    "nombre": "Alvaro Vázquez Barberá ",
+    "rol": "Programador",
+    "fecha": "2026-04-21",
+    "hora": "19:42",
+    "imagenFondo": "Imagenes/ponente-1776793366925-1000094194.jpg",
+    "video": "../Recursos/video.mp4",
+    "etiquetas": [
+      "developer"
+    ],
+    "bio": "hizo todo el back",
+    "redes": {
+      "linkedin": "",
+      "instagram": ""
+    }
   }
 ]
